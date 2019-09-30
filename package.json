@@ -1,0 +1,65 @@
+{
+	"name": "vscode-metalua-formatter",
+	"displayName": "vscode-metalua-formatter",
+	"description": "Metalua based formatter for vscode ",
+	"version": "0.0.1",
+	"icon":"lua-logo.png",
+	"publisher": "Alex",
+	"repository": {
+		"type": "git",
+		"url":"https://github.com/geappliances/vscode-metalua-formatter.git"
+	},
+	"keywords": [
+		"Lua",
+		"format",
+		"metalua"
+],
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"categories": [
+		"Formatters"
+	],
+	"activationEvents": [
+		"onCommand:extension.luaFormatter",
+		"onLanguage:lua"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"configurations": {
+				"tittle": "vscode-metalua-formatter",
+				"properties": {
+					"vscode-metalua-formatter.luaPath": {
+					"type":["string","null"],
+					"default": "test--remember to change it",
+					"description": "Specifies the path to lua5.1 location"
+					},
+					"vscode-lua-formatter.indentSize": {
+						"type":"integer",
+						"default": 2,
+						"description": "Specifies the indentation used to format the file"
+					}
+			}
+		},
+		"commands": [
+			{
+				"command": "extension.luaFormatter",
+				"title": "Lua Formatter"
+			}
+		]
+	},
+	"scripts": {
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.38.0",
+		"eslint": "^5.13.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"vscode-test": "^1.2.0"
+	}
+}
