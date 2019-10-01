@@ -1,6 +1,10 @@
 # vscode-metalua-formatter 
 
-Metalua formatter for vscode. Based on [Format Lua](https://github.com/denglf/FormatLua)
+Metalua formatter for vscode. Based on [Format Lua](https://github.com/denglf/FormatLua).
+
+## Instructions and Keyboard Shortcut
+Open the command pallet and type `>Lua Format` to run the formatter.
+  #### Shortcut: `ctrl+alt+l`     Mac: `ctrl+cmd+l`  
 
 ## Requirements
 
