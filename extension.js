@@ -10,18 +10,17 @@ const activate = (context) => {
 
   let disposable = vscode.commands.registerCommand('extension.luaFormatter', function () {
     formatFile();
-    // vscode.window.showInformationMessage('formatter runned');
   });
 
   context.subscriptions.push(disposable);
 }
 exports.activate = activate;
 
-function deactivate() { }
+const deactivate = () => { };
 
 const formatFile = () => {
   const editor = vscode.window.activeTextEditor;
-  if (editor && editor.document.languageId != 'lua') {
+  if(editor && editor.document.languageId != 'lua') {
     vscode.window.showInformationMessage('No lua file found.');
     return;
   }
@@ -30,24 +29,19 @@ const formatFile = () => {
   const constants = {
     currentlyOpenFileInEditor: editor.document.fileName,
     luaFormatterScriptDir: __dirname + '/luacode',
-    luaFormatterScript: __dirname + '/luacode/formatter.lua'
+    luaFormatterScript: __dirname + '/luacode/formatter.lua',
+    luaPath: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('luaPath'),
+    indentSize: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize')
+
   };
-  const configurations = vscode.workspace.getConfiguration('vscode-metalua-formatter');
-  // console.log(vscode.workspace.getConfiguration());
-  let luaPath = configurations.get('vscode-metalua-formatter.luaPath');
-  let indentSize = configurations.get('vscode-metalua-formatter.indentSize');
-  // console.log(luaPath);
 
-  if (!luaPath) {
-    vscode.window.showInformationMessage('No lua path has been specified in the configurations. Using default settings');
-    luaPath = '/usr/local/bin/lua';
-  }
-  if(!indentSize){
-    indentSize = 2;
+  if(!constants.luaPath) {
+    vscode.window.showInformationMessage('Lua path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
+    return;
   }
 
-  const params = [constants.luaFormatterScript, '--file', constants.currentlyOpenFileInEditor, '--ts', indentSize];
-  const proc = child_process.spawn(luaPath, params, {
+  const params = [constants.luaFormatterScript, '--file', constants.currentlyOpenFileInEditor, '--ts', constants.indentSize];
+  const proc = child_process.spawn(constants.luaPath, params, {
     cwd: constants.luaFormatterScriptDir
   });
 

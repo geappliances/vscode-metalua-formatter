@@ -4,7 +4,6 @@
 	"description": "Metalua based formatter for vscode ",
 	"version": "0.0.1",
 	"icon":"lua-logo.png",
-	"publisher": "Alex",
 	"repository": {
 		"type": "git",
 		"url":"https://github.com/geappliances/vscode-metalua-formatter.git"
@@ -13,7 +12,8 @@
 		"Lua",
 		"format",
 		"metalua"
-],
+	],
+	"publisher": "Alex",
 	"engines": {
 		"vscode": "^1.38.0"
 	},
@@ -26,18 +26,18 @@
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"configurations": {
+		"configuration": {
 				"tittle": "vscode-metalua-formatter",
 				"properties": {
 					"vscode-metalua-formatter.luaPath": {
-					"type":["string","null"],
-					"default": "test--remember to change it",
-					"description": "Specifies the path to lua5.1 location"
+						"type": "string",
+						"default": "",
+						"description": "Specifies the path to lua5.1 location."
 					},
-					"vscode-lua-formatter.indentSize": {
-						"type":"integer",
-						"default": 2,
-						"description": "Specifies the indentation used to format the file"
+					"vscode-metalua-formatter.indentSize": {
+							"type": "integer",
+							"default": 2,
+							"description": "Specifies the indentation used to format the file."
 					}
 			}
 		},
@@ -46,10 +46,19 @@
 				"command": "extension.luaFormatter",
 				"title": "Lua Formatter"
 			}
-		]
+		],
+		"keybindings": [
+      {
+        "command": "extension.luaFormatter",
+        "key": "ctrl+alt+l",
+        "mac": "ctrl+cmd+l",
+        "when": "editorTextFocus"
+      }
+    ]
 	},
 	"scripts": {
-		"test": "node ./test/runTest.js"
+		"test": "node ./test/runTest.js",
+		"postinstall": "node ./node_modules/vscode/bin/install"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
