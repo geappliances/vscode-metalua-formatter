@@ -13,7 +13,7 @@
 		"format",
 		"metalua"
 	],
-	"publisher": "Alex",
+	"publisher": "arivero",
 	"engines": {
 		"vscode": "^1.38.0"
 	},
