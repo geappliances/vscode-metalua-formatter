@@ -8,9 +8,9 @@ Open the command pallet and type `>Lua Format` to run the formatter.
 
 ## Requirements
 
-Formatter only works with Lua version 5.1. In addition the complete path to Lua must be specified in the configs such as:
+Formatter only works with Lua version 5.1. In addition, the complete path to Lua must be specified in the configs such as:
 ```
-vscode-metalua-formatter.luaPath = '/usr/local/bin/lua'
+vscode-metalua-formatter.luaPath = '/Users/<user>/.lenv/lua/5.1.5/bin/lua'
 ```
 
 ## Extension Settings
