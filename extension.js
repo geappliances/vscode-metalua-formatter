@@ -14,6 +14,7 @@ const activate = (context) => {
 
   context.subscriptions.push(disposable);
 }
+
 exports.activate = activate;
 
 const deactivate = () => { };
@@ -21,22 +22,22 @@ const deactivate = () => { };
 const formatFile = () => {
   const editor = vscode.window.activeTextEditor;
   if(editor && editor.document.languageId != 'lua') {
-    vscode.window.showInformationMessage('No lua file found.');
+    vscode.window.showInformationMessage('Not a lua file.');
     return;
   }
 
   editor.document.save();
+
   const constants = {
     currentlyOpenFileInEditor: editor.document.fileName,
     luaFormatterScriptDir: __dirname + '/luacode',
     luaFormatterScript: __dirname + '/luacode/formatter.lua',
     luaPath: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('luaPath'),
     indentSize: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize')
-
   };
 
   if(!constants.luaPath) {
-    vscode.window.showInformationMessage('Lua path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
+    vscode.window.showErrorMessage('Lua 5.1 path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
     return;
   }
 
