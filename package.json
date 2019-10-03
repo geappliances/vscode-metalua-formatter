@@ -52,7 +52,7 @@
         "command": "extension.luaFormatter",
         "key": "shift+alt+f",
         "mac": "shift+alt+f",
-        "linux": "shift+alt+i",
+        "linux": "ctl+shift+i",
         "when": "editorLangId == lua"
       }
     ]
