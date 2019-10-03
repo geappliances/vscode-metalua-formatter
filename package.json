@@ -2,7 +2,7 @@
   "name": "vscode-metalua-formatter",
   "displayName": "vscode-metalua-formatter",
   "description": "Metalua based formatter for vscode ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icon": "lua-logo.png",
   "repository": {
     "type": "git",

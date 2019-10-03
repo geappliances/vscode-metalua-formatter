@@ -4,7 +4,7 @@ Metalua formatter for vscode. Based on [Format Lua](https://github.com/denglf/Fo
 
 ## Instructions and Keyboard Shortcut
 Open the command pallet and type `>Lua Format` to run the formatter.
-  #### Windows: `shift+alt+f`     Mac: `shift+option+f` Linux: `shift+alt+i`  
+  #### Windows: `shift+alt+f`     Mac: `shift+option+f` Linux: `ctrl+shift+i`  
 
 ## Requirements
 
