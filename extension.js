@@ -42,7 +42,7 @@ const formatFile = () => {
     return;
   }
   else if(!fs.existsSync(constants.luaPath)) {
-    vscode.window.showErrorMessage('The specified lua path \'' + constants.luaPath + '\' does not exists.');
+    vscode.window.showErrorMessage('The specified lua path \'' + constants.luaPath + '\' does not exist.');
   }
 
 
