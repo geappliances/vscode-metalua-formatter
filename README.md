@@ -4,11 +4,11 @@ Metalua formatter for vscode. Based on [Format Lua](https://github.com/denglf/Fo
 
 ## Instructions and Keyboard Shortcut
 Open the command pallet and type `>Lua Format` to run the formatter.
-  #### Shortcut: `ctrl+alt+l`     Mac: `ctrl+cmd+l`  
+  #### Windows: `shift+alt+f`     Mac: `shift+option+f` Linux: `shift+alt+i`  
 
 ## Requirements
 
-Formatter only works with Lua version 5.1. In addition, the complete path to Lua must be specified in the configs such as:
+Formatter only works with Lua version 5.1. From version 5.2 onwards the formatter will not work. In addition, the complete path to Lua must be specified in the configs such as:
 ```
 Mac
 vscode-metalua-formatter.luaPath = '/Users/<user>/.lenv/lua/5.1.5/bin/lua'
@@ -17,7 +17,8 @@ Linux
 vscode-metalua-formatter.luaPath = '/home/<user>/.lenv/lua/5.1.5/bin/lua'
 ```
 You can find the complete path by running the following command:
-```which lua```
+```which lua``` 
+For lenv 
 
 ## Extension Settings
 

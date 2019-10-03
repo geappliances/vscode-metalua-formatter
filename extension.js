@@ -2,6 +2,7 @@
 
 const vscode = require('vscode');
 const child_process = require('child_process');
+const fs = require('fs');
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -40,6 +41,10 @@ const formatFile = () => {
     vscode.window.showErrorMessage('Lua 5.1 path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
     return;
   }
+  else if(!fs.existsSync(constants.luaPath)) {
+    vscode.window.showErrorMessage('The specified lua path \'' + constants.luaPath + '\' does not exists.');
+  }
+
 
   const params = [constants.luaFormatterScript, '--file', constants.currentlyOpenFileInEditor, '--ts', constants.indentSize];
   const proc = child_process.spawn(constants.luaPath, params, {

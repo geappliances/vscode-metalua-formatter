@@ -2,7 +2,7 @@
   "name": "vscode-metalua-formatter",
   "displayName": "vscode-metalua-formatter",
   "description": "Metalua based formatter for vscode ",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icon": "lua-logo.png",
   "repository": {
     "type": "git",
@@ -50,15 +50,15 @@
     "keybindings": [
       {
         "command": "extension.luaFormatter",
-        "key": "ctrl+alt+l",
-        "mac": "ctrl+cmd+l",
-        "when": "editorTextFocus"
+        "key": "shift+alt+f",
+        "mac": "shift+alt+f",
+        "linux": "shift+alt+i",
+        "when": "editorLangId == lua"
       }
     ]
   },
   "scripts": {
-    "test": "node ./test/runTest.js",
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "test": "node ./test/runTest.js"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
