@@ -16,9 +16,6 @@ vscode-metalua-formatter.luaPath = '/Users/<user>/.lenv/lua/5.1.5/bin/lua'
 Linux
 vscode-metalua-formatter.luaPath = '/home/<user>/.lenv/lua/5.1.5/bin/lua'
 ```
-You can find the complete path by running the following command:
-```which lua``` 
-For lenv 
 
 ## Extension Settings
 
