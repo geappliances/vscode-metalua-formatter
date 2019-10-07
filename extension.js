@@ -2,6 +2,7 @@
 
 const vscode = require('vscode');
 const child_process = require('child_process');
+const fs = require('fs');
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -14,6 +15,7 @@ const activate = (context) => {
 
   context.subscriptions.push(disposable);
 }
+
 exports.activate = activate;
 
 const deactivate = () => { };
@@ -21,24 +23,28 @@ const deactivate = () => { };
 const formatFile = () => {
   const editor = vscode.window.activeTextEditor;
   if(editor && editor.document.languageId != 'lua') {
-    vscode.window.showInformationMessage('No lua file found.');
+    vscode.window.showInformationMessage('Not a lua file.');
     return;
   }
 
   editor.document.save();
+
   const constants = {
     currentlyOpenFileInEditor: editor.document.fileName,
     luaFormatterScriptDir: __dirname + '/luacode',
     luaFormatterScript: __dirname + '/luacode/formatter.lua',
     luaPath: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('luaPath'),
     indentSize: vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize')
-
   };
 
   if(!constants.luaPath) {
-    vscode.window.showInformationMessage('Lua path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
+    vscode.window.showErrorMessage('Lua 5.1 path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
     return;
   }
+  else if(!fs.existsSync(constants.luaPath)) {
+    vscode.window.showErrorMessage('The specified lua path \'' + constants.luaPath + '\' does not exist.');
+  }
+
 
   const params = [constants.luaFormatterScript, '--file', constants.currentlyOpenFileInEditor, '--ts', constants.indentSize];
   const proc = child_process.spawn(constants.luaPath, params, {
