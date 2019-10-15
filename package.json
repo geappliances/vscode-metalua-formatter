@@ -2,7 +2,7 @@
   "name": "vscode-metalua-formatter",
   "displayName": "vscode-metalua-formatter",
   "description": "Metalua based formatter for vscode ",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "icon": "lua-logo.png",
   "repository": {
     "type": "git",
@@ -52,7 +52,7 @@
         "command": "extension.luaFormatter",
         "key": "shift+alt+f",
         "mac": "shift+alt+f",
-        "linux": "ctl+shift+i",
+        "linux": "ctrl+shift+i",
         "when": "editorLangId == lua"
       }
     ]
