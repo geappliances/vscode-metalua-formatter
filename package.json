@@ -1,8 +1,8 @@
 {
   "name": "vscode-metalua-formatter",
   "displayName": "vscode-metalua-formatter",
-  "description": "Metalua based formatter for vscode ",
-  "version": "1.0.7",
+  "description": "Metalua-based formatter for vscode ",
+  "version": "1.1.0",
   "icon": "lua-logo.png",
   "repository": {
     "type": "git",
@@ -21,13 +21,12 @@
     "Formatters"
   ],
   "activationEvents": [
-    "onCommand:extension.luaFormatter",
     "onLanguage:lua"
   ],
   "main": "./extension.js",
   "contributes": {
     "configuration": {
-      "tittle": "vscode-metalua-formatter",
+      "title": "vscode-metalua-formatter",
       "properties": {
         "vscode-metalua-formatter.luaPath": {
           "type": "string",
@@ -40,22 +39,7 @@
           "description": "Specifies the indentation used to format the file."
         }
       }
-    },
-    "commands": [
-      {
-        "command": "extension.luaFormatter",
-        "title": "Lua Formatter"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "extension.luaFormatter",
-        "key": "shift+alt+f",
-        "mac": "shift+alt+f",
-        "linux": "ctrl+shift+i",
-        "when": "editorLangId == lua"
-      }
-    ]
+    }
   },
   "scripts": {
     "test": "node ./test/runTest.js"
