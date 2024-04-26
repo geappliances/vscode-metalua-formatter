@@ -520,6 +520,9 @@ function M.indentcode(source, delimiter,indenttable, ...)
     local message = validate(source);
     if message then return nil, message end
 
+    -- Special escape for '|' character
+    source = source:gsub('|', '/|')
+
     --
     -- Seek for delimiters positions
     --
@@ -587,6 +590,9 @@ function M.indentcode(source, delimiter,indenttable, ...)
     if #indented > 0 and not indented[#indented]:match('%s$') then
         indented[#indented + 1] = delimiter
     end
+
+    -- Remove special escape for '|' character
+    source = source:gsub('%b/|', '|')
 
     -- Uncomment shebang when needed
     local formattedcode = table.concat(indented)

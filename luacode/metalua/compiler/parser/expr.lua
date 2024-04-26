@@ -175,6 +175,7 @@ return function(M)
             { "<<", prec = 35, builder = opf2 "lshift" },
             { "&", prec = 33, builder = opf2 "bitand"  },
             { "~", prec = 32, builder = opf2 "bitxor"  },
+            { "/|", prec = 31, builder = opf2 "bitor"  },
             { "==", prec = 30, builder = opf2 "eq"  },
             { "~=", prec = 30, builder = op_ne  },
             { "<",  prec = 30, builder = opf2 "lt"  },
