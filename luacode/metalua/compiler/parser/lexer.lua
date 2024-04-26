@@ -34,6 +34,7 @@ return function()
         "in", "local", "nil", "not", "or", "repeat",
         "return", "then", "true", "until", "while",
         "...", "..", "==", ">=", "<=", "~=",
+        ">>", "<<", "&", "|", "~", "//", -- Lua5.3
         "::", -- Lua5,2
         "+{", "-{" } -- Metalua
 

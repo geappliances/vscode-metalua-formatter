@@ -321,11 +321,6 @@ end
 -- @usage local depth = format.indentLevel("local var")
 --------------------------------------------------------------------------------
 local function getindentlevel(source, indenttable)
-
-    if not loadstring(source, 'CheckingFormatterSource') then
-        return
-    end
-
     -----------------------------------------------------------------------------
     -- Walk through AST
     --
@@ -464,6 +459,13 @@ local delimiterposition = function (str, strstart)
     end
 end
 
+local function validate(string)
+  local fileName = os.tmpname()
+  writeFile(fileName, string)
+  local exitCode = os.execute("./lua53/lua53.sh ./luacode/validate.lua " .. fileName)
+
+  if exitCode ~= 0 then return "Failed to validate" end
+end
 --------------------------------------------------------------------------------
 -- Indent Lua Source Code.
 --
@@ -515,8 +517,8 @@ function M.indentcode(source, delimiter,indenttable, ...)
     end
 
     -- Check code validity
-    local status, message = loadstring(source,"isCodeValid")
-    if not status then return status, message end
+    local message = validate(source);
+    if message then return nil, message end
 
     --
     -- Seek for delimiters positions
