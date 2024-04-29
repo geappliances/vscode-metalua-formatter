@@ -591,11 +591,12 @@ function M.indentcode(source, delimiter,indenttable, ...)
         indented[#indented + 1] = delimiter
     end
 
+    local formattedcode = table.concat(indented)
+
     -- Remove special escape for '|' character
-    source = source:gsub('%b/|', '|')
+    formattedcode = formattedcode:gsub('%b/|', '|')
 
     -- Uncomment shebang when needed
-    local formattedcode = table.concat(indented)
     if shebang and #formattedcode then
         return formattedcode:sub(1 + #COMMENT)
     end
