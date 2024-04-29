@@ -9,7 +9,7 @@ if [ $PLATFORM = "Darwin" ]; then
   elif [ "$(uname -m)" = "arm64" ]; then
     exec $SCRIPTPATH/macos-arm64/lua53 $@
   fi
-elif [ $PLATFORM = "Linux" ]; then
+else
   if [ $ARCH = "x86_64" ]; then
     exec $SCRIPTPATH/linux/lua53 $@
   elif [ $ARCH = "aarch64" ]; then
@@ -17,6 +17,4 @@ elif [ $PLATFORM = "Linux" ]; then
   elif [ $ARCH = "armv7l" ]; then
     exec $SCRIPTPATH/armv7l/lua53 $@
   fi
-else
-  exec $SCRIPTPATH/windows/lua53.exe $@
 fi
