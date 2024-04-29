@@ -1,7 +1,4 @@
-SCRIPTPATH=$(
-  cd $(dirname $0)
-  pwd -P
-)
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
 
 PLATFORM=$(uname)
 ARCH=$(uname -m)
