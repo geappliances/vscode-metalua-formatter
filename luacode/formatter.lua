@@ -465,9 +465,9 @@ local function validate(string, platform)
   writeFile(fileName, string)
 
   if platform == "win32" then
-    exitCode = os.execute("lua/lua53.bat luacode/validate.lua " .. fileName)
+    exitCode = os.execute("../lua/lua53.bat validate.lua " .. fileName)
   else
-    exitCode = os.execute("./lua/lua53.sh luacode/validate.lua " .. fileName)
+    exitCode = os.execute("../lua/lua53.sh validate.lua " .. fileName)
   end
 
   if exitCode ~= 0 then return "Failed to validate" end
