@@ -458,19 +458,6 @@ local delimiterposition = function (str, strstart)
     end
 end
 
-local function validate(string, platform)
-  local fileName = os.tmpname()
-  local exitCode
-  writeFile(fileName, string)
-
-  if platform == "win32" then
-    exitCode = os.execute("../lua/lua53.bat validate.lua " .. fileName)
-  else
-    exitCode = os.execute("../lua/lua53.sh validate.lua " .. fileName)
-  end
-
-  if exitCode ~= 0 then return "Failed to validate" end
-end
 --------------------------------------------------------------------------------
 -- Indent Lua Source Code.
 --
@@ -520,10 +507,6 @@ function M.indentcode(source, delimiter,indenttable, platform, ...)
         -- Simply comment shebang when formating
         source = table.concat({COMMENT, source})
     end
-
-    -- Check code validity
-    local message = validate(source, platform);
-    if message then return nil, message end
 
     -- Special escape for '|' character
     source = source:gsub('|', '/|')

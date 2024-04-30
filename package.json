@@ -28,10 +28,10 @@
     "configuration": {
       "title": "vscode-metalua-formatter",
       "properties": {
-        "vscode-metalua-formatter.luaPath": {
+        "vscode-metalua-formatter.customLuaPath": {
           "type": "string",
           "default": "",
-          "description": "Specifies the path to lua5.1 location."
+          "description": "Lua 5.1 stand-alone interpreter path. Optional. Leave blank to use the extension-provided interpreter."
         },
         "vscode-metalua-formatter.indentSize": {
           "type": "integer",
