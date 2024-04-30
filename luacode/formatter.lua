@@ -16,7 +16,6 @@
 -- @module formatter
 --
 --------------------------------------------------------------------------------
-
 local M = {}
 require 'metalua.loader'
 local math = require 'math'
@@ -663,7 +662,7 @@ function process_args()
         elseif a=="--in" then
             t.myindent,i = arg[i+1]+0,i+2
         elseif a=="--platform" then
-            t.platform,i = arg[i+1]+0,i+2
+            t.platform,i = arg[i+1],i+2
         else
             print(usage.."Bad flag: "..a)
             os.exit(-1)
@@ -693,5 +692,5 @@ args.myindent = args.myindent or myindent
 resultText=M.indentcode(readfile(args.filename), '\n', true, args.platform, (' '):rep(args.mytabsize))
 -- print()
 if resultText then
-  writeFile(args.filename,resultText)
+  writeFile(args.filename, resultText)
 end
