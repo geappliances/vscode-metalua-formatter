@@ -15,6 +15,7 @@ const activate = () => {
         const indentSize = vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize');
         const platform = os.platform();
         const arch = os.arch();
+        const customLuaPath =  vscode.workspace.getConfiguration('vscode-metalua-formatter').get('customLuaPath')
         let builtInLuaPath;
 
         if(platform === "darwin") {
@@ -36,12 +37,13 @@ const activate = () => {
         else if(platform === "win32") {
           builtInLuaPath = path.join(__dirname, 'lua', 'windows', 'lua51.exe');
         }
-        else {
-          vscode.window.showErrorMessage(`Platform '${platform}' is not supported.`);
+        else if(!customLuaPath){
+          vscode.window.showErrorMessage(`No built-in Lua for '${platform}'. Please specify a custom Lua path in the settings.`);
           reject();
+          return;
         }
 
-        const luaPath = vscode.workspace.getConfiguration('vscode-metalua-formatter').get('customLuaPath') || builtInLuaPath;
+        const luaPath = customLuaPath || builtInLuaPath;
 
         if(!fs.existsSync(luaPath)) {
           vscode.window.showErrorMessage('The specified lua path \'' + luaPath + '\' does not exist.');
