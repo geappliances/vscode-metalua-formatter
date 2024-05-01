@@ -471,7 +471,7 @@ end
 -- @usage indentCode('local var', '\n', true, '\t')
 -- @usage indentCode('local var', '\n', true, --[[tabulationSize]]4, --[[indentationSize]]2)
 --------------------------------------------------------------------------------
-function M.indentcode(source, delimiter,indenttable, platform, ...)
+function M.indentcode(source, delimiter,indenttable, ...)
 
     --
     -- Create function which will generate indentation
@@ -644,8 +644,6 @@ function process_args()
             t.mytabsize,i = arg[i+1]+0,i+2
         elseif a=="--in" then
             t.myindent,i = arg[i+1]+0,i+2
-        elseif a=="--platform" then
-            t.platform,i = arg[i+1],i+2
         else
             print(usage.."Bad flag: "..a)
             os.exit(-1)
@@ -672,7 +670,7 @@ if not args.filename then error(usage.."no Lua file given") end
 args.mytabsize = args.mytabsize or mytabs
 args.myindent = args.myindent or myindent
 -- print(readfile(args.filename))
-resultText=M.indentcode(readfile(args.filename), '\n', true, args.platform, (' '):rep(args.mytabsize))
+resultText=M.indentcode(readfile(args.filename), '\n', true, (' '):rep(args.mytabsize))
 -- print()
 if resultText then
   writeFile(args.filename, resultText)

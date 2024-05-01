@@ -52,7 +52,7 @@ const activate = () => {
         const tmpFile = path.join(tmp, 'tmp.lua')
 
         fs.writeFile(tmpFile, document.getText(), () => {
-          const params = [luaFormatterScript, '--file', tmpFile, '--ts', indentSize, '--platform', platform];
+          const params = [luaFormatterScript, '--file', tmpFile, '--ts', indentSize];
           const format = child_process.spawn(luaPath, params, {
             cwd: luaFormatterScriptDir
           });
