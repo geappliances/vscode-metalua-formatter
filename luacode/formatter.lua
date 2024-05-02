@@ -16,7 +16,6 @@
 -- @module formatter
 --
 --------------------------------------------------------------------------------
-
 local M = {}
 require 'metalua.loader'
 local math = require 'math'
@@ -321,11 +320,6 @@ end
 -- @usage local depth = format.indentLevel("local var")
 --------------------------------------------------------------------------------
 local function getindentlevel(source, indenttable)
-
-    if not loadstring(source, 'CheckingFormatterSource') then
-        return
-    end
-
     -----------------------------------------------------------------------------
     -- Walk through AST
     --
@@ -514,9 +508,8 @@ function M.indentcode(source, delimiter,indenttable, ...)
         source = table.concat({COMMENT, source})
     end
 
-    -- Check code validity
-    local status, message = loadstring(source,"isCodeValid")
-    if not status then return status, message end
+    -- Special escape for '|' character
+    source = source:gsub('|', '/|')
 
     --
     -- Seek for delimiters positions
@@ -586,8 +579,12 @@ function M.indentcode(source, delimiter,indenttable, ...)
         indented[#indented + 1] = delimiter
     end
 
-    -- Uncomment shebang when needed
     local formattedcode = table.concat(indented)
+
+    -- Remove special escape for '|' character
+    formattedcode = formattedcode:gsub('%b/|', '|')
+
+    -- Uncomment shebang when needed
     if shebang and #formattedcode then
         return formattedcode:sub(1 + #COMMENT)
     end
@@ -676,5 +673,5 @@ args.myindent = args.myindent or myindent
 resultText=M.indentcode(readfile(args.filename), '\n', true, (' '):rep(args.mytabsize))
 -- print()
 if resultText then
-  writeFile(args.filename,resultText)
+  writeFile(args.filename, resultText)
 end

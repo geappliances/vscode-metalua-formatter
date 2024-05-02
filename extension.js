@@ -12,33 +12,60 @@ const activate = () => {
       return new Promise((resolve, reject) => {
         const luaFormatterScriptDir = __dirname + '/luacode';
         const luaFormatterScript = __dirname + '/luacode/formatter.lua';
-        const luaPath = vscode.workspace.getConfiguration('vscode-metalua-formatter').get('luaPath');
         const indentSize = vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize');
+        const platform = os.platform();
+        const arch = os.arch();
+        const customLuaPath =  vscode.workspace.getConfiguration('vscode-metalua-formatter').get('customLuaPath')
+        let builtInLuaPath;
 
-        if(!luaPath) {
-          vscode.window.showErrorMessage('Lua 5.1 path has not been specified in the configurations. Make sure to fill the \'luaPath\' field in the extensions settings.');
-          reject();
+        if(platform === "darwin") {
+          if(arch === "x64") {
+            builtInLuaPath = path.join(__dirname, 'lua', 'macos', 'lua51');
+          }
+          else if(arch === "arm64") {
+            builtInLuaPath = path.join(__dirname, 'lua', 'macos-arm64', 'lua51');
+          }
         }
-        else if(!fs.existsSync(luaPath)) {
+        else if(platform === "linux") {
+          if(arch === "x64") {
+            builtInLuaPath = path.join(__dirname, 'lua', 'linux', 'lua51');
+          }
+          else if(arch === "arm64") {
+            builtInLuaPath = path.join(__dirname, 'lua', 'linux-arm64', 'lua51');
+          }
+        }
+        else if(platform === "win32") {
+          builtInLuaPath = path.join(__dirname, 'lua', 'windows', 'lua51.exe');
+        }
+        else if(!customLuaPath){
+          vscode.window.showErrorMessage(`No built-in Lua for '${platform}'. Please specify a custom Lua path in the settings.`);
+          reject();
+          return;
+        }
+
+        const luaPath = customLuaPath || builtInLuaPath;
+
+        if(!fs.existsSync(luaPath)) {
           vscode.window.showErrorMessage('The specified lua path \'' + luaPath + '\' does not exist.');
           reject();
         }
 
         const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'vscode-metalua-formatter-'));
+        const tmpFile = path.join(tmp, 'tmp.lua')
 
-        fs.writeFile(path.join(tmp, 'tmp.lua'), document.getText(), () => {
-          const params = [luaFormatterScript, '--file', path.join(tmp, 'tmp.lua'), '--ts', indentSize];
-          const proc = child_process.spawn(luaPath, params, {
+        fs.writeFile(tmpFile, document.getText(), () => {
+          const params = [luaFormatterScript, '--file', tmpFile, '--ts', indentSize];
+          const format = child_process.spawn(luaPath, params, {
             cwd: luaFormatterScriptDir
           });
 
-          proc.stderr.on('data', (data) => {
+          format.stderr.on('data', (data) => {
             console.log('err', data.asciiSlice());
           });
 
-          proc.on('close', (code) => {
+          format.on('close', (code) => {
             if(code === 0) {
-              fs.readFile(path.join(tmp, 'tmp.lua'), (err, data) => {
+              fs.readFile(tmpFile, (err, data) => {
                 if(err) {
                   reject();
                 }
@@ -46,6 +73,7 @@ const activate = () => {
               });
             }
             else {
+              vscode.window.showErrorMessage('Cannot run formatter. The file contains syntax errors.');
               reject();
             }
           });

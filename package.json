@@ -2,7 +2,7 @@
   "name": "vscode-metalua-formatter",
   "displayName": "vscode-metalua-formatter",
   "description": "Metalua-based formatter for vscode ",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "icon": "lua-logo.png",
   "repository": {
     "type": "git",
@@ -28,10 +28,10 @@
     "configuration": {
       "title": "vscode-metalua-formatter",
       "properties": {
-        "vscode-metalua-formatter.luaPath": {
+        "vscode-metalua-formatter.customLuaPath": {
           "type": "string",
           "default": "",
-          "description": "Specifies the path to lua5.1 location."
+          "description": "Lua 5.1 stand-alone interpreter path. Optional. Leave blank to use the extension-provided interpreter."
         },
         "vscode-metalua-formatter.indentSize": {
           "type": "integer",
