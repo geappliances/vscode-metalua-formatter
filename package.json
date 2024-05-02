@@ -1,7 +1,7 @@
 {
-  "name": "vscode-metalua-formatter",
-  "displayName": "vscode-metalua-formatter",
-  "description": "Metalua-based formatter for vscode ",
+  "name": "metalua-formatter",
+  "displayName": "Metalua Formatter",
+  "description": "Metalua-based formatter for VS Code ",
   "version": "1.2.0",
   "icon": "lua-logo.png",
   "repository": {
@@ -13,7 +13,7 @@
     "format",
     "metalua"
   ],
-  "publisher": "arivero",
+  "publisher": "gea-embedded",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -26,17 +26,17 @@
   "main": "./extension.js",
   "contributes": {
     "configuration": {
-      "title": "vscode-metalua-formatter",
+      "title": "Metalua Formatter",
       "properties": {
-        "vscode-metalua-formatter.customLuaPath": {
+        "metalua-formatter.customLuaPath": {
           "type": "string",
           "default": "",
           "description": "Lua 5.1 stand-alone interpreter path. Optional. Leave blank to use the extension-provided interpreter."
         },
-        "vscode-metalua-formatter.indentSize": {
+        "metalua-formatter.indentSize": {
           "type": "integer",
           "default": 2,
-          "description": "Specifies the indentation used to format the file."
+          "description": "The number of spaces to use for indentation."
         }
       }
     }

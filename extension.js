@@ -12,10 +12,10 @@ const activate = () => {
       return new Promise((resolve, reject) => {
         const luaFormatterScriptDir = __dirname + '/luacode';
         const luaFormatterScript = __dirname + '/luacode/formatter.lua';
-        const indentSize = vscode.workspace.getConfiguration('vscode-metalua-formatter').get('indentSize');
+        const indentSize = vscode.workspace.getConfiguration('metalua-formatter').get('indentSize');
         const platform = os.platform();
         const arch = os.arch();
-        const customLuaPath =  vscode.workspace.getConfiguration('vscode-metalua-formatter').get('customLuaPath')
+        const customLuaPath =  vscode.workspace.getConfiguration('metalua-formatter').get('customLuaPath')
         let builtInLuaPath;
 
         if(platform === "darwin") {
